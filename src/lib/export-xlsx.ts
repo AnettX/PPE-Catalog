@@ -45,7 +45,7 @@ export function buildOrderWorkbook(lines: CartLine[], division: string) {
   set(`A${tr + 3}`, { t: "s", v: "Замовник" });
   set(`B${tr + 3}`, { t: "s", v: division });
 
-  ws["!ref"] = XLSX.utils.encode_range({ s: { r: 0, c: 0 }, e: { r: tr + 2, c: 5 } });
+  ws["!ref"] = XLSX.utils.encode_range({ s: { r: 0, c: 0 }, e: { r: tr + 2, c: 5 } /* 0-based: covers through Excel row tr+3 */ });
   ws["!cols"] = [{ wch: 14 }, { wch: 42 }, { wch: 11 }, { wch: 16 }, { wch: 16 }, { wch: 16 }];
 
   const wb = XLSX.utils.book_new();
