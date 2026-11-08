@@ -159,7 +159,7 @@ function ProcurementPage() {
             <div className="overflow-hidden rounded-lg border border-border bg-card">
               <table className="w-full text-sm">
                 <thead className="sticky top-0 z-10 bg-muted text-xs text-muted-foreground">
-                  <tr className="border-b border-border text-left">
+                  <tr className="border-b border-border text-left whitespace-nowrap">
                     <th className="px-4 py-2.5 font-medium">Код ТМЦ</th>
                     <th className="px-4 py-2.5 font-medium">Найменування</th>
                     <th className="px-4 py-2.5 font-medium">Постачальник</th>
