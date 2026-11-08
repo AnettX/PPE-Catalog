@@ -76,15 +76,15 @@
   --color-success: var(--success);
   --color-success-soft: var(--success-soft);
   --color-warning: var(--warning);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-mono);
+  --font-sans: var(--app-font-sans);
+  --font-mono: var(--app-font-mono);
   --shadow-panel: var(--shadow-panel);
 }
 
 :root {
   --radius: 0.5rem;
-  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --app-font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --app-font-mono: "IBM Plex Mono", ui-monospace, monospace;
   --background: oklch(0.985 0.002 250);
   --foreground: oklch(0.2 0.015 255);
   --card: oklch(1 0 0);
@@ -134,7 +134,7 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    font-family: var(--font-sans);
+    font-family: var(--app-font-sans);
     -webkit-font-smoothing: antialiased;
   }
 
