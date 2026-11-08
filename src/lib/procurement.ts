@@ -49,7 +49,7 @@ export function buildLines(cart: Cart, catalog: CatalogItem[] = CATALOG): CartLi
   return catalog
     .filter((item) => (cart[item.code] ?? 0) > 0)
     .map((item) => {
-      const qty = cart[item.code];
+      const qty = cart[item.code] ?? 0;
       const sumNet = round2(item.priceNet * qty);
       const sumVat = round2(sumNet * VAT_RATE);
       return { item, qty, sumNet, sumVat, sumGross: round2(sumNet + sumVat) };

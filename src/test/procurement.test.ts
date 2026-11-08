@@ -24,7 +24,7 @@ describe("procurement pricing", () => {
 
   it("exports the required columns in order", () => {
     const wb = buildOrderWorkbook(buildLines({ "ТМЦ-44091": 2 }), "ТОВ «Буд-1»");
-    const rows = XLSX.utils.sheet_to_json<unknown[]>(wb.Sheets["Заявка"], { header: 1 });
+    const rows = XLSX.utils.sheet_to_json<unknown[]>(wb.Sheets["Заявка"]!, { header: 1 });
     expect(rows[0]).toEqual([...EXPORT_HEADERS]);
     expect(rows[1]).toEqual(["ТМЦ-44091", "Каска захисна, клас Г", 2, 245, 490, 588]);
   });
