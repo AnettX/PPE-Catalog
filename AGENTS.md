@@ -28,3 +28,8 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- Pricing/VAT math lives in `src/lib/procurement.ts` as pure functions (rounded to kopecks); UI and Excel export both read from it so totals never diverge.
+- SheetJS is installed from the official cdn.sheetjs.com tarball, not the npm `xlsx` package, because the npm release is outdated and has known vulnerabilities.
