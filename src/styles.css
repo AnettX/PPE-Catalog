@@ -1,9 +1,6 @@
 /*
  * Tailwind v4 entry: config lives here, with no tailwind.config.js or PostCSS plugin.
- * - Keep every @import in this top block, above @theme and the rest of the file. Install an
- *   npm package before @importing its CSS. Never @import a remote URL (web fonts, CDN CSS): the
- *   build resolves @import from the filesystem. Load those with a <link> in the head() of
- *   src/routes/__root.tsx and name the family in a --font-* token in @theme inline below.
+ * Keep every @import in this top block. Web fonts load via <link> in src/routes/__root.tsx.
  */
 @import "tailwindcss" source(none);
 @source "../src";
@@ -12,31 +9,17 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Design system definition.
- *
- * The design lives in this file: oklch color tokens on the shadcn variables
- * (--background, --foreground, --primary, --secondary, --muted, --accent, ...) plus
- * new tokens as needed, font tokens, and custom styles and animations.
- *
- * The @theme inline block maps CSS custom properties to Tailwind utility
- * classes (e.g. --color-primary -> bg-primary, text-primary).
- *
- * The :root and .dark blocks define the actual color values using oklch.
- * All colors MUST use oklch format.
- *
- * To add a new semantic color:
- * 1. Add the variable to :root (light value) and .dark (dark value)
- * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ * Design system: "Industrial Technical Procurement" (from the client's DESIGN.md).
+ * Planar surfaces, 1px borders, burnt safety-orange accent, slate ink, compliance green.
  */
 
 @theme inline {
+  --radius-xs: 2px;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -44,16 +27,32 @@
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
   --color-primary-foreground: var(--primary-foreground);
+  --color-primary-soft: var(--primary-soft);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+  --color-subtle-foreground: var(--subtle-foreground);
   --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
   --color-accent-foreground: var(--accent-foreground);
+  --color-ink: var(--ink);
+  --color-ink-foreground: var(--ink-foreground);
+  --color-chip: var(--chip);
+  --color-chip-foreground: var(--chip-foreground);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-success-strong-soft: var(--success-strong-soft);
+  --color-success-foreground: var(--success-foreground);
+  --color-success-border: var(--success-border);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-ring-offset-background: var(--background);
@@ -70,60 +69,75 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  --color-brand: var(--brand);
-  --color-brand-foreground: var(--brand-foreground);
-  --color-brand-soft: var(--brand-soft);
-  --color-success: var(--success);
-  --color-success-soft: var(--success-soft);
-  --color-warning: var(--warning);
-  --font-sans: var(--app-font-sans);
-  --font-mono: var(--app-font-mono);
+  --font-sans: var(--app-font-body);
+  --font-display: var(--app-font-display);
   --shadow-panel: var(--shadow-panel);
+  --shadow-pop: var(--shadow-pop);
 }
 
 :root {
   --radius: 0.5rem;
-  --app-font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
-  --app-font-mono: "IBM Plex Mono", ui-monospace, monospace;
-  --background: oklch(0.985 0.002 250);
-  --foreground: oklch(0.2 0.015 255);
+  --app-font-display: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --app-font-body: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+
+  /* surfaces */
+  --background: oklch(0.983 0.008 278.6); /* #f8f9ff */
+  --foreground: oklch(0.223 0.045 253.8); /* #0b1c30 */
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.2 0.015 255);
+  --card-foreground: oklch(0.223 0.045 253.8);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.2 0.015 255);
-  --primary: oklch(0.24 0.02 255);
-  --primary-foreground: oklch(0.985 0.002 250);
-  --secondary: oklch(0.955 0.004 250);
-  --secondary-foreground: oklch(0.24 0.02 255);
-  --muted: oklch(0.965 0.003 250);
-  --muted-foreground: oklch(0.52 0.015 255);
-  --accent: oklch(0.955 0.006 250);
-  --accent-foreground: oklch(0.24 0.02 255);
-  --brand: oklch(0.72 0.16 62);
-  --brand-foreground: oklch(0.22 0.03 60);
-  --brand-soft: oklch(0.96 0.04 75);
-  --success: oklch(0.62 0.15 150);
-  --success-soft: oklch(0.95 0.04 150);
-  --warning: oklch(0.6 0.15 55);
-  --destructive: oklch(0.577 0.22 27);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.915 0.005 250);
-  --input: oklch(0.9 0.006 250);
-  --ring: oklch(0.72 0.16 62);
+  --popover-foreground: oklch(0.223 0.045 253.8);
+  --muted: oklch(0.967 0.016 266.3); /* surface-container-low #eff4ff */
+  --muted-foreground: oklch(0.446 0.037 257.3); /* #475569 */
+  --subtle-foreground: oklch(0.711 0.035 256.8); /* #94a3b8 */
+  --accent: oklch(0.947 0.025 263.3); /* surface-container #e5eeff */
+  --accent-strong: oklch(0.931 0.033 261); /* #dce9ff */
+  --accent-foreground: oklch(0.208 0.04 265.8);
+  --secondary: oklch(0.915 0.038 272.5); /* secondary-container #dae2fd */
+  --secondary-foreground: oklch(0.208 0.04 265.8);
+
+  /* accents */
+  --primary: oklch(0.491 0.151 41.1); /* #a33900 */
+  --primary-hover: oklch(0.579 0.178 41); /* #cc4900 */
+  --primary-foreground: oklch(1 0 0);
+  --primary-soft: oklch(0.918 0.044 40.9); /* #ffdbce */
+  --ink: oklch(0.208 0.04 265.8); /* slate 900 */
+  --ink-foreground: oklch(1 0 0);
+  --chip: oklch(0.968 0.007 247.9); /* #f1f5f9 */
+  --chip-foreground: oklch(0.372 0.039 257.3); /* #334155 */
+
+  /* status */
+  --success: oklch(0.461 0.099 163.1); /* #006948 */
+  --success-soft: oklch(0.979 0.021 166.1); /* #ecfdf5 */
+  --success-strong-soft: oklch(0.897 0.129 162.7); /* #85f8c4 */
+  --success-foreground: oklch(0.385 0.083 163.4); /* #005137 */
+  --success-border: oklch(0.905 0.089 164.2); /* #a7f3d0 */
+  --warning: oklch(0.666 0.157 58.3); /* #d97706 */
+  --warning-soft: oklch(0.97 0.03 75);
+  --destructive: oklch(0.506 0.193 27.7); /* #ba1a1a */
+  --destructive-foreground: oklch(1 0 0);
+
+  --border: oklch(0.929 0.013 255.5); /* #e2e8f0 */
+  --border-strong: oklch(0.869 0.02 252.9); /* #cbd5e1 */
+  --input: oklch(0.869 0.02 252.9);
+  --ring: oklch(0.579 0.178 41);
+
+  --shadow-panel: 0 1px 3px 0 oklch(0.208 0.04 265.8 / 0.05), 0 8px 24px -8px oklch(0.208 0.04 265.8 / 0.12);
+  --shadow-pop: 0 4px 12px -2px oklch(0.208 0.04 265.8 / 0.08), 0 1px 3px 0 oklch(0.208 0.04 265.8 / 0.05);
+
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
   --sidebar: oklch(1 0 0);
-  --sidebar-foreground: oklch(0.2 0.015 255);
-  --sidebar-primary: oklch(0.24 0.02 255);
-  --sidebar-primary-foreground: oklch(0.985 0.002 250);
-  --sidebar-accent: oklch(0.955 0.004 250);
-  --sidebar-accent-foreground: oklch(0.24 0.02 255);
-  --sidebar-border: oklch(0.915 0.005 250);
-  --sidebar-ring: oklch(0.72 0.16 62);
-  --shadow-panel: -12px 0 32px -24px oklch(0.2 0.015 255 / 0.25);
+  --sidebar-foreground: oklch(0.223 0.045 253.8);
+  --sidebar-primary: oklch(0.491 0.151 41.1);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.947 0.025 263.3);
+  --sidebar-accent-foreground: oklch(0.208 0.04 265.8);
+  --sidebar-border: oklch(0.929 0.013 255.5);
+  --sidebar-ring: oklch(0.579 0.178 41);
 }
 
 @layer base {
@@ -134,11 +148,55 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    font-family: var(--app-font-sans);
+    font-family: var(--app-font-body);
     -webkit-font-smoothing: antialiased;
   }
 
-  .tabular {
-    font-variant-numeric: tabular-nums;
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--app-font-display);
+  }
+}
+
+/* Geist with tabular numerals — TMC codes, prices, quantities */
+@utility data {
+  font-family: var(--app-font-display);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+/* 11px uppercase micro-label: column heads, status tags, badges */
+@utility micro {
+  font-family: var(--app-font-display);
+  font-size: 0.6875rem;
+  line-height: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 12mm;
+  }
+  body * {
+    visibility: hidden;
+  }
+  [data-print-area],
+  [data-print-area] * {
+    visibility: visible;
+  }
+  [data-print-area] {
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  [data-print-hide] {
+    display: none !important;
   }
 }

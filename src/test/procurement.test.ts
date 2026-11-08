@@ -6,15 +6,15 @@ import { buildLines, cartTotals, clampQty, priceWithVat } from "@/lib/procuremen
 
 describe("procurement pricing", () => {
   it("adds 20% VAT to the unit price", () => {
-    expect(priceWithVat(245)).toBe(294);
+    expect(priceWithVat(420)).toBe(504);
   });
 
   it("computes net, 20% VAT and grand total for the order", () => {
-    // 2 × 245.00 + 10 × 14.20 = 632.00 net
-    const totals = cartTotals(buildLines({ "ТМЦ-44091": 2, "ТМЦ-44148": 10 }));
-    expect(totals.net).toBe(632);
-    expect(totals.vat).toBe(126.4);
-    expect(totals.gross).toBe(758.4);
+    // 2 × 420.00 + 10 × 88.00 = 1 720.00 net
+    const totals = cartTotals(buildLines({ "ТМЦ-44091": 2, "ТМЦ-21940": 10 }));
+    expect(totals.net).toBe(1720);
+    expect(totals.vat).toBe(344);
+    expect(totals.gross).toBe(2064);
   });
 
   it("never lets quantity exceed stock or go below zero", () => {
@@ -26,6 +26,6 @@ describe("procurement pricing", () => {
     const wb = buildOrderWorkbook(buildLines({ "ТМЦ-44091": 2 }), "ТОВ «Буд-1»");
     const rows = XLSX.utils.sheet_to_json<unknown[]>(wb.Sheets["Заявка"]!, { header: 1 });
     expect(rows[0]).toEqual([...EXPORT_HEADERS]);
-    expect(rows[1]).toEqual(["ТМЦ-44091", "Каска захисна, клас Г", 2, 245, 490, 588]);
+    expect(rows[1]).toEqual(["ТМЦ-44091", "Каска захисна універсальна (Тип 1)", 2, 420, 840, 1008]);
   });
 });
