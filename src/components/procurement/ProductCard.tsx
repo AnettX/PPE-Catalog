@@ -26,7 +26,9 @@ export function ProductCard({ item, qty, onQty }: ProductCardProps) {
     >
       <div className="flex items-center justify-between gap-2">
         <TmcBadge code={item.code} />
-        <span className="micro truncate text-muted-foreground">{item.supplier}</span>
+        <span className="micro truncate text-[10px] tracking-[0.02em] text-muted-foreground">
+          {item.supplier}
+        </span>
       </div>
 
       <div className="relative mt-2.5 aspect-[5/4] overflow-hidden rounded-md bg-muted">
@@ -54,7 +56,7 @@ export function ProductCard({ item, qty, onQty }: ProductCardProps) {
           <div className="min-w-0">
             <div className="data text-base leading-tight font-semibold">
               {formatMoney(item.priceNet)}
-              <span className="ml-1 font-sans text-[10px] font-normal text-muted-foreground">
+              <span className="ml-1 font-sans text-[10px] font-normal whitespace-nowrap text-muted-foreground">
                 без ПДВ
               </span>
             </div>
@@ -77,12 +79,14 @@ export function ProductCard({ item, qty, onQty }: ProductCardProps) {
 
         <div className="mt-3">
           {qty > 0 ? (
-            <div className="flex h-9 items-center justify-between gap-2 rounded-sm border border-accent-strong bg-accent pr-1 pl-2.5">
-              <span className="flex items-center gap-1.5 text-xs font-medium text-accent-foreground">
-                <CircleCheck className="size-3.5 text-success" />
-                В заявці: <span className="data font-semibold">{qty} {item.unit}</span>
+            <div className="flex h-9 items-center justify-between gap-1.5 rounded-sm border border-accent-strong bg-accent pr-1 pl-2">
+              <span className="flex min-w-0 items-center gap-1 text-[11px] font-medium whitespace-nowrap text-accent-foreground xl:text-xs">
+                <CircleCheck className="hidden size-3.5 shrink-0 text-success xl:block" />
+                <span className="truncate">
+                  В заявці: <span className="data font-semibold">{qty} {item.unit}</span>
+                </span>
               </span>
-              <div className="flex gap-1">
+              <div className="flex shrink-0 gap-1">
                 <button
                   type="button"
                   aria-label={`Зменшити: ${item.name}`}

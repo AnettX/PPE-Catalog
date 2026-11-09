@@ -173,7 +173,7 @@ const moneyFmt = new Intl.NumberFormat("uk-UA", {
   maximumFractionDigits: 2,
 });
 
-export const formatMoney = (n: number) => `${moneyFmt.format(n)} ₴`;
+export const formatMoney = (n: number) => `${moneyFmt.format(n)}\u00a0₴`;
 export const formatAmount = (n: number) => moneyFmt.format(n);
 
 const pad = (n: number) => String(n).padStart(2, "0");

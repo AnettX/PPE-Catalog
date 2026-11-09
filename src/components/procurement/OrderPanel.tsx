@@ -38,7 +38,7 @@ export function OrderPanel({
         </div>
         <div className="min-w-0 flex-1">
           <h2 className="text-base leading-tight font-semibold tracking-tight">Поточна заявка на ЗІЗ</h2>
-          <p className="mt-0.5 truncate text-xs text-muted-foreground">
+          <p className="mt-0.5 text-xs text-muted-foreground">
             Підрозділ: {division} ({holding})
           </p>
         </div>

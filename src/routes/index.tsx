@@ -102,7 +102,7 @@ function ProcurementPage() {
 
       <div className="mx-auto grid max-w-[1600px] grid-cols-[minmax(0,1fr)_320px] items-start gap-6 px-6 py-6 xl:grid-cols-[minmax(0,1fr)_380px] xl:px-10">
         <main className="min-w-0">
-          <h1 className="text-[1.75rem] leading-9 font-semibold tracking-[-0.02em]">
+          <h1 className="text-2xl leading-8 font-semibold tracking-[-0.02em] xl:text-[1.75rem] xl:leading-9">
             Забезпечення засобами індивідуального захисту
           </h1>
           <div className="mt-3 flex flex-wrap gap-2">
