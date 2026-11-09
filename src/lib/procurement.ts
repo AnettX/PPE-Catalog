@@ -15,7 +15,8 @@ export interface CatalogItem {
 }
 
 export const CATEGORIES = [
-  "Захист голови та очей",
+  "Захист голови",
+  "Захист очей",
   "Спецодяг",
   "Захисне взуття",
   "Захист рук",
@@ -29,7 +30,7 @@ export const CATALOG: CatalogItem[] = [
     code: "ТМЦ-44091",
     name: "Каска захисна універсальна (Тип 1)",
     description: "Термостійкий ABS-пластик, регульована вентиляція, текстильне наголів'я",
-    category: "Захист голови та очей",
+    category: "Захист голови",
     standard: "EN 397",
     unit: "шт",
     supplier: "Постачальник А",
@@ -62,7 +63,7 @@ export const CATALOG: CatalogItem[] = [
     code: "ТМЦ-55201",
     name: "Окуляри захисні панорамні (Тип 4)",
     description: "Закритого типу, панорамна лінза, покриття проти подряпин і запітнівання",
-    category: "Захист голови та очей",
+    category: "Захист очей",
     standard: "EN 166",
     unit: "шт",
     supplier: "Постачальник А",
