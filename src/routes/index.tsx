@@ -26,12 +26,12 @@ const ALL = "all";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Каталог ЗІЗ і заявка — ТОВ «БУД-АЛЬЯНС»" },
+      { title: "Каталог ЗІЗ" },
       {
         name: "description",
         content: "Каталог засобів індивідуального захисту, формування заявки та вивантаження в Excel.",
       },
-      { property: "og:title", content: "Каталог ЗІЗ і заявка — ТОВ «БУД-АЛЬЯНС»" },
+      { property: "og:title", content: "Каталог ЗІЗ" },
       {
         property: "og:description",
         content: "Каталог засобів індивідуального захисту, формування заявки та вивантаження в Excel.",
