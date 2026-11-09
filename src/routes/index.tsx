@@ -10,18 +10,20 @@ import { ProductCard } from "@/components/procurement/ProductCard";
 import { Button } from "@/components/ui/button";
 import { downloadOrderXlsx } from "@/lib/export-xlsx";
 import {
+  ALL_CATEGORIES,
   CATALOG,
   CATEGORIES,
   buildLines,
   buildOrderText,
   clampQty,
+  filterCatalog,
   type Cart,
 } from "@/lib/procurement";
 import { cn } from "@/lib/utils";
 
 const HOLDING = "ТОВ «БУД-АЛЬЯНС»";
 const DIVISION = "ТОВ «Буд-1»";
-const ALL = "all";
+const ALL = ALL_CATEGORIES;
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -62,17 +64,7 @@ function ProcurementPage() {
     });
   };
 
-  const visible = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    return CATALOG.filter(
-      (i) =>
-        (category === ALL || i.category === category) &&
-        (!q ||
-          [i.code, i.name, i.supplier, i.standard, i.description].some((f) =>
-            f.toLowerCase().includes(q),
-          )),
-    );
-  }, [query, category]);
+  const visible = useMemo(() => filterCatalog(CATALOG, category, query), [query, category]);
 
   const lines = useMemo(() => buildLines(cart), [cart]);
 

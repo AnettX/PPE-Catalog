@@ -127,6 +127,21 @@ export const CATALOG: CatalogItem[] = [
   },
 ];
 
+export const ALL_CATEGORIES = "all";
+
+/** Catalog filter used by the page: exact category match + free-text search. */
+export const filterCatalog = (items: CatalogItem[], category: string, query: string) => {
+  const q = query.trim().toLowerCase();
+  return items.filter(
+    (i) =>
+      (category === ALL_CATEGORIES || i.category === category) &&
+      (!q ||
+        [i.code, i.name, i.supplier, i.standard, i.description].some((f) =>
+          f.toLowerCase().includes(q),
+        )),
+  );
+};
+
 export const LOW_STOCK_THRESHOLD = 50;
 
 export type Cart = Record<string, number>;
