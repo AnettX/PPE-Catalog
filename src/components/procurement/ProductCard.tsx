@@ -79,9 +79,9 @@ export function ProductCard({ item, qty, onQty }: ProductCardProps) {
 
         <div className="mt-3">
           {qty > 0 ? (
-            <div className="flex h-9 items-center justify-between gap-2 rounded-sm border border-accent-strong bg-accent pr-1 pl-2.5">
-              <span className="flex min-w-0 items-center gap-1.5 text-xs font-medium whitespace-nowrap text-accent-foreground">
-                <CircleCheck className="size-3.5 shrink-0 text-success" />
+            <div className="flex h-9 items-center justify-between gap-1.5 rounded-sm border border-accent-strong bg-accent pr-1 pl-2">
+              <span className="flex min-w-0 items-center gap-1 text-[11px] font-medium whitespace-nowrap text-accent-foreground xl:text-xs">
+                <CircleCheck className="hidden size-3.5 shrink-0 text-success xl:block" />
                 <span className="truncate">
                   В заявці: <span className="data font-semibold">{qty} {item.unit}</span>
                 </span>
