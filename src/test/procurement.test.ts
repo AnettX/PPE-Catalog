@@ -2,7 +2,15 @@ import * as XLSX from "xlsx";
 import { describe, expect, it } from "vitest";
 
 import { EXPORT_HEADERS, buildOrderWorkbook } from "@/lib/export-xlsx";
-import { buildLines, cartTotals, clampQty, priceWithVat } from "@/lib/procurement";
+import {
+  CATALOG,
+  CATEGORIES,
+  buildLines,
+  cartTotals,
+  clampQty,
+  filterCatalog,
+  priceWithVat,
+} from "@/lib/procurement";
 
 describe("procurement pricing", () => {
   it("adds 20% VAT to the unit price", () => {
@@ -27,5 +35,27 @@ describe("procurement pricing", () => {
     const rows = XLSX.utils.sheet_to_json<unknown[]>(wb.Sheets["Заявка"]!, { header: 1 });
     expect(rows[0]).toEqual([...EXPORT_HEADERS]);
     expect(rows[1]).toEqual(["ТМЦ-44091", "Каска захисна універсальна (Тип 1)", 2, 420, 840, 1008]);
+  });
+});
+
+describe("catalog categories", () => {
+  it("has separate head and eye protection categories", () => {
+    expect(CATEGORIES).toContain("Захист голови");
+    expect(CATEGORIES).toContain("Захист очей");
+    expect(CATEGORIES).not.toContain("Захист голови та очей");
+  });
+
+  it("head protection filter shows the helmet but not the goggles", () => {
+    const codes = filterCatalog(CATALOG, "Захист голови", "").map((i) => i.code);
+    expect(codes).toEqual(["ТМЦ-44091"]);
+  });
+
+  it("eye protection filter shows the goggles but not the helmet", () => {
+    const codes = filterCatalog(CATALOG, "Захист очей", "").map((i) => i.code);
+    expect(codes).toEqual(["ТМЦ-55201"]);
+  });
+
+  it("every product belongs to a listed category", () => {
+    for (const item of CATALOG) expect(CATEGORIES).toContain(item.category);
   });
 });

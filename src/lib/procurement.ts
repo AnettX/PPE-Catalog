@@ -15,7 +15,8 @@ export interface CatalogItem {
 }
 
 export const CATEGORIES = [
-  "Захист голови та очей",
+  "Захист голови",
+  "Захист очей",
   "Спецодяг",
   "Захисне взуття",
   "Захист рук",
@@ -29,7 +30,7 @@ export const CATALOG: CatalogItem[] = [
     code: "ТМЦ-44091",
     name: "Каска захисна універсальна (Тип 1)",
     description: "Термостійкий ABS-пластик, регульована вентиляція, текстильне наголів'я",
-    category: "Захист голови та очей",
+    category: "Захист голови",
     standard: "EN 397",
     unit: "шт",
     supplier: "Постачальник А",
@@ -62,7 +63,7 @@ export const CATALOG: CatalogItem[] = [
     code: "ТМЦ-55201",
     name: "Окуляри захисні панорамні (Тип 4)",
     description: "Закритого типу, панорамна лінза, покриття проти подряпин і запітнівання",
-    category: "Захист голови та очей",
+    category: "Захист очей",
     standard: "EN 166",
     unit: "шт",
     supplier: "Постачальник А",
@@ -125,6 +126,21 @@ export const CATALOG: CatalogItem[] = [
     stock: 0,
   },
 ];
+
+export const ALL_CATEGORIES = "all";
+
+/** Catalog filter used by the page: exact category match + free-text search. */
+export const filterCatalog = (items: CatalogItem[], category: string, query: string) => {
+  const q = query.trim().toLowerCase();
+  return items.filter(
+    (i) =>
+      (category === ALL_CATEGORIES || i.category === category) &&
+      (!q ||
+        [i.code, i.name, i.supplier, i.standard, i.description].some((f) =>
+          f.toLowerCase().includes(q),
+        )),
+  );
+};
 
 export const LOW_STOCK_THRESHOLD = 50;
 
